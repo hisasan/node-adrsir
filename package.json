@@ -1,6 +1,6 @@
 {
   "name": "node-adrsir",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Infrared transmission control by Bit Trade One ADRSIR board",
   "main": "index.js",
   "scripts": {
