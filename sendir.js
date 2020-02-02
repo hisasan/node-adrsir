@@ -1,4 +1,4 @@
-const adrsir = require('./adrsir');
+const adrsir = require('./');
 const fs     = require('fs').promises;
 
 let ir = new adrsir();
