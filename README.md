@@ -22,6 +22,18 @@ async function read() {
 }
 ```
 
+### 赤外線データ書き込み
+
+ADRSIRボードに赤外線データを書き込みます。
+```JavaScript
+async function write(file) {
+    const no   = 1; // 記録番号（赤外線を記録するADRSIRのボタン番号）
+    const fs   = require('fs').promises;
+    const file = await fs.readFile(file, 'utf8');
+    await ir.write(no, Buffer.from(file, 'hex'));
+}
+```
+
 ### 赤外線送信
 
 ADRSIRボードから赤外線データを送信します。
@@ -38,6 +50,7 @@ async function send(file) {
 |コマンド|内容|
 |:----|:--------------------------------------|
 |readir.js|node readir.js no 指定番号の赤外線データを読み出して表示|
+|writeir.js|node writeir.js file 指定ファイルの赤外線データを指定番号に書き込み、ファイルの中身はreadir.jsで表示したそのまま|
 |sendir.js|node sendir.js file 指定ファイルの赤外線データを送信、ファイルの中身はreadir.jsで表示したそのまま|
 
 ## 使用環境

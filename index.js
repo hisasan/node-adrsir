@@ -115,4 +115,29 @@ adrsir.prototype.read = async function(no) {
     }
 };
 
+adrsir.prototype.write = async function(no, buf) {
+    let bus = null;
+    try {
+        bus = await openI2C(BUS_NO);
+
+        await writeI2C(bus, SLAVE_ADDRESS, W1_MEMO_NO_WRITE, Buffer.from([no]));
+
+        let size = Buffer.alloc(2);
+        size.writeUInt16BE(buf.length / 4, 0);
+        await writeI2C(bus, SLAVE_ADDRESS, W2_DATA_NUM_WRITE, size);
+
+        for (let i = 0; i < buf.length; i += 4) {
+            await writeI2C(bus, SLAVE_ADDRESS, W3_DATA_WRITE, buf.slice(i, i + 4));
+        }
+
+        await writeI2C(bus, SLAVE_ADDRESS, W4_FLASH_WRITE, Buffer.alloc(1));
+
+        return buf;
+    }
+    catch(e) {
+        await closeI2C(bus);
+        throw e;
+    }
+};
+
 module.exports = adrsir;
