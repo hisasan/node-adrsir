@@ -89,7 +89,7 @@ adrsir.prototype.read = async function(no) {
     try {
         bus = await openI2C(BUS_NO);
 
-        writeI2C(bus, SLAVE_ADDRESS, R1_MEMO_NO_WRITE, Buffer.from([no]));
+        await writeI2C(bus, SLAVE_ADDRESS, R1_MEMO_NO_WRITE, Buffer.from([no]));
 
         let size = Buffer.alloc(3);
         await readI2C(bus, SLAVE_ADDRESS, R2_DATA_NUM_READ, size);
