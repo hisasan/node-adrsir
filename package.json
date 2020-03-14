@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/hisasan/node-adrsir#readme",
   "dependencies": {
-    "i2c-bus": "^4.0.8"
+    "i2c-bus": "^5.1.0"
   }
 }
